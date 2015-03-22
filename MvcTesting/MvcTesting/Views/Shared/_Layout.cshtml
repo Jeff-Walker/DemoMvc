@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Styles/base")
+    <!-- Shim to make HTML5 elements usable in older Internet Explorer versions -->
+    <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+<body>
+    <div class="container">
+        @RenderBody()
+    </div>
+    @Scripts.Render("~/Scripts/jquery")
+    @Scripts.Render("~/Scripts/jquery-ui")
+    @Scripts.Render("~/Scripts/jqueryUploader")
+    @Scripts.Render("~/Scripts/jqueryUploaderIframe")
+    @Scripts.Render("~/Scripts/bootstrap")
+    @RenderSection("PageScripts", false)
+</body>
+</html>
