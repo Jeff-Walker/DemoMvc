@@ -141,6 +141,7 @@
     <Compile Include="Models\Dimension.cs" />
     <Compile Include="Models\UserImage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ContentInfo.cs" />
     <Compile Include="Services\ContentManager.cs" />
     <Compile Include="Services\ImageMaker.cs" />
   </ItemGroup>

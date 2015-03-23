@@ -1,8 +1,9 @@
+using MvcDemo.Infrastructure.DependencyResolvers;
+
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(MvcDemo.App_Start.NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(MvcDemo.App_Start.NinjectWebCommon), "Stop")]
 
 namespace MvcDemo.App_Start {
-    using MCV.Skeleton.Infrastructure;
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;
     using Ninject;
     using Ninject.Web.Common;
