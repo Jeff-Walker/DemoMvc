@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using MvcDemo.Services;
+using MvcDemo.ViewModels;
 using Ninject;
 
 namespace MvcDemo.Infrastructure.DependencyResolvers {
@@ -25,6 +26,7 @@ namespace MvcDemo.Infrastructure.DependencyResolvers {
         void AddBindings() {
             _kernel.Bind<IContentManager>().To<ContentManager>();
             _kernel.Bind<IImageMaker>().To<ImageMaker>();
+            _kernel.Bind<IViewModelBuilder<ViewUploadViewModel>>().To<ViewUploadViewModelBuilder>();
         }
 
         public System.Web.Http.Dependencies.IDependencyScope BeginScope() {

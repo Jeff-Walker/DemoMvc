@@ -7,21 +7,18 @@ using MvcDemo.ViewModels;
 namespace MvcDemo.Controllers {
     public class HomeController : Controller {
         readonly IContentManager _contentManager;
+        readonly IViewModelBuilder<ViewUploadViewModel> _viewUploadViewModelBuilder;
 
-        public HomeController(IContentManager contentManager) {
+        public HomeController(IContentManager contentManager, IViewModelBuilder<ViewUploadViewModel> viewUploadViewModelBuilder) {
             _contentManager = contentManager;
+            _viewUploadViewModelBuilder = viewUploadViewModelBuilder;
         }
 
         public ActionResult Index() {
-            return View(BuildViewModel());
+            return View(_viewUploadViewModelBuilder.BuildViewModel());
         }
 
-        ViewUploadViewModel BuildViewModel() {
-            _contentManager.ListImages().Select<IContentInfo, UploadedImage>(c => {new UploadedImage {Id=c.Id, OriginalFilename = c.OriginalFilename, ThumbnailUrl = c.}})
-            return new ViewUploadViewModel() {
-                    
-            }
-        }
+      
 
         [HttpPost]
         public ActionResult Upload() {
@@ -32,7 +29,37 @@ namespace MvcDemo.Controllers {
                     _contentManager.SaveImage(fileName, file.ContentType, file.InputStream);
                 }
             }
-            return View("Index", BuildViewModel());
+            return View("Index", _viewUploadViewModelBuilder.BuildViewModel());
+        }
+
+        [HttpGet]
+        public FileResult Image(string id) {
+            var content = _contentManager.LoadContent(id);
+            return File(content.Bytes, content.ContentType);
+        }
+    }
+
+    public class ViewUploadViewModelBuilder {
+        readonly IContentManager _contentManager;
+
+        public ViewUploadViewModelBuilder(IContentManager contentManager) {
+            _contentManager = contentManager;
+        }
+
+        public ViewUploadViewModel BuildViewModel() {
+            return new ViewUploadViewModel {
+                UploadedImages = _contentManager.ListImages().Select(c =>
+                        new UploadedImage {
+                            Id = c.Id,
+                            OriginalFilename = c.OriginalFilename,
+                            ThumbnailUrl = BuildUrl(c.ThumbnailId),
+                            FullImageUrl = BuildUrl(c.ImageId)
+                        })
+            };
+        }
+
+        string BuildUrl(string imageId) {
+            throw new System.NotImplementedException();
         }
     }
 }

@@ -142,6 +142,7 @@
     <Compile Include="Services\ContentInfo.cs" />
     <Compile Include="Services\ContentManager.cs" />
     <Compile Include="Services\ImageMaker.cs" />
+    <Compile Include="Services\ModelBuilder.cs" />
     <Compile Include="ViewModels\ViewUploadViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

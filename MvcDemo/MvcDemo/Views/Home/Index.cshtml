@@ -1,5 +1,8 @@
-﻿@{
+﻿@model MvcDemo.ViewModels.ViewUploadViewModel
+
+@{
     ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="container">
@@ -8,5 +11,8 @@
             <h1 class="page-header">Upload and view some pictures</h1>
         </div>
     </div>
-    @foreach()
+    
+    @using (Html.BeginForm()) {
+        
+    }
 </div>
