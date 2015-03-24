@@ -21,7 +21,7 @@ namespace MvcDemo {
 
 
 
-            BundleTable.EnableOptimizations = true;
+            BundleTable.EnableOptimizations = false;
         }
     }
 }
