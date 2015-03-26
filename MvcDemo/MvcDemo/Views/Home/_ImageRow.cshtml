@@ -1,8 +1,10 @@
-﻿
+﻿@model MvcDemo.ViewModels.UploadedImage
+
 <div class="row">
     <div class="col-md-7">
         <a href="javascript:void">
-            <img src="http://placehold.it/500x700" class="img-responsive" />
+            
+            <img src="@Url.Action("Image", "Home", new{id=Model.ThumbnailId})" class="img-responsive" />
         </a>
     </div>
     <div class="col-md-5">

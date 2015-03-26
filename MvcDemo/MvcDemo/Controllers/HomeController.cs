@@ -21,7 +21,7 @@ namespace MvcDemo.Controllers {
       
 
         [HttpPost]
-        public ActionResult Upload() {
+        public ActionResult Upload(ViewUploadViewModel model) {
             for (var i = 0 ; i < Request.Files.Count ; i++) {
                 var file = Request.Files[i];
                 if (file != null && file.ContentLength > 0) {
@@ -52,8 +52,8 @@ namespace MvcDemo.Controllers {
                         new UploadedImage {
                             Id = c.Id,
                             OriginalFilename = c.OriginalFilename,
-                            ThumbnailUrl = BuildUrl(c.ThumbnailId),
-                            FullImageUrl = BuildUrl(c.ImageId)
+                            ThumbnailId = c.ThumbnailId,
+                            FullImageId = c.ImageId,
                         })
             };
         }

@@ -8,7 +8,7 @@ namespace MvcDemo.ViewModels {
     public class UploadedImage {
         public string Id { get; set; }
         public string OriginalFilename { get; set; }
-        public string ThumbnailUrl { get; set; }
-        public string FullImageUrl { get; set; }
+        public string ThumbnailId { get; set; }
+        public string FullImageId { get; set; }
     }
 }

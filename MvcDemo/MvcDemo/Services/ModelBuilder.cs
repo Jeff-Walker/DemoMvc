@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Web.Mvc;
 using MvcDemo.ViewModels;
 
 namespace MvcDemo.Services {
@@ -21,14 +22,11 @@ namespace MvcDemo.Services {
                         new UploadedImage {
                             Id = c.Id,
                             OriginalFilename = c.OriginalFilename,
-                            ThumbnailUrl = BuildUrl(c.ThumbnailId),
-                            FullImageUrl = BuildUrl(c.ImageId)
+                            ThumbnailId = c.ThumbnailId,
+                            FullImageId = c.ImageId,
                         })
             };
         }
 
-        string BuildUrl(string imageId) {
-            throw new System.NotImplementedException();
-        }
     }
 }

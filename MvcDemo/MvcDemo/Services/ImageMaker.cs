@@ -23,18 +23,24 @@ namespace MvcDemo.Services {
         }
 
         static Size CalculateNewSize(Image originalImage) {
-            var originalWidth = originalImage.Width;
-            var originalHeight = originalImage.Height;
+//            var originalWidth = originalImage.Width;
+//            var originalHeight = originalImage.Height;
+            var original = originalImage.Size;
+
+            if (original.Width < ThumbnailMaximumSize.Width
+                    && original.Height < ThumbnailMaximumSize.Height) {
+                return original;
+            }
 
             var newSize = new Size();
-            var aspect = ((double) originalWidth) / originalHeight;
+            var aspect = ((double) original.Width) / original.Height;
             if (aspect > 0) {
                 // lanscape
                 newSize.Width = ThumbnailMaximumSize.Width;
-                newSize.Height = (int) (originalHeight * aspect);
+                newSize.Height = (int) (newSize.Width / aspect);
             } else {
-                newSize.Width = (int) (originalWidth * aspect);
                 newSize.Height = ThumbnailMaximumSize.Height;
+                newSize.Width = (int)(newSize.Height * aspect);
             }
 
             return newSize;
