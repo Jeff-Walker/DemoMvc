@@ -2,17 +2,24 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
+using MvcDemo.Annotations;
 
 namespace MvcDemo.Services {
     public interface IContentManager {
         IEnumerable<IContentInfo> ListImages();
-        string SaveImage(string originalFilename, string contentType, Stream inputStream);
+        void SaveImage(string originalFilename, string contentType, Stream inputStream);
         IContentInfo LoadContentInfo(string id);
         IContent LoadContent(string id);
     }
 
+    /*
+     * This is an in-memory content management system. To simulate real life, it has these properties:
+     * 1. The metadata seperate from the content.
+     * 2. The metadata is cheaper to access than the content.
+     * 3. Because of this, you get the metadata and then get the content in a seperate step.
+     */
 
-
+    [UsedImplicitly]
     public class ContentManager : IContentManager {
         static readonly IDictionary<string, IContentInfo> ContentDatabase = new ConcurrentDictionary<string, IContentInfo>();
         static readonly IDictionary<string, IContent> ContentObjects = new ConcurrentDictionary<string, IContent>();
@@ -22,7 +29,7 @@ namespace MvcDemo.Services {
             return ContentDatabase.Values;
         }
 
-        public string SaveImage(string originalFilename, string contentType, Stream inputStream) {
+        public void SaveImage(string originalFilename, string contentType, Stream inputStream) {
             var id = NewId();
 
             var originalImageBytes = ReadStream(inputStream);
@@ -55,8 +62,6 @@ namespace MvcDemo.Services {
             ContentDatabase.Add(id, contentInfo);
             ContentObjects.Add(content.Id, content);
             ContentObjects.Add(thumbnailContent.Id, thumbnailContent);
-
-            return id;
         }
 
 

@@ -25,12 +25,10 @@ namespace MvcDemo.Services {
                 }
             }
         }
-        public Size ThumbnailSize { get; set; }
-        public Size OriginalSize { get; set; }
+        public Size ThumbnailSize { get; private set; }
+        public Size OriginalSize { get; private set; }
 
         static Size CalculateNewSize(Image originalImage) {
-//            var originalWidth = originalImage.Width;
-//            var originalHeight = originalImage.Height;
             var original = originalImage.Size;
 
             if (original.Width < ThumbnailMaximumSize.Width
@@ -38,7 +36,7 @@ namespace MvcDemo.Services {
                 return original;
             }
 
-             var newSize = new Size();
+            var newSize = new Size();
             var aspect = ((double) original.Width) / original.Height;
             if (aspect > 1.0) {
                 // lanscape

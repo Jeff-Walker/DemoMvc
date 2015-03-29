@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
+using MvcDemo.Annotations;
 using MvcDemo.ViewModels;
 
 namespace MvcDemo.Services {
@@ -9,6 +10,7 @@ namespace MvcDemo.Services {
 
     }
 
+    [UsedImplicitly]
     public class ViewUploadViewModelBuilder : IViewModelBuilder<ViewUploadViewModel> {
         readonly IContentManager _contentManager;
 

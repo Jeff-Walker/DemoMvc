@@ -6,7 +6,6 @@ namespace MvcDemo.Services {
     public interface IContentInfo {
         string Id { get; }
         string OriginalFilename { get; }
-        string UserDescription { get; }
         string ContentType { get; }
         string ImageId { get;  }
         string ThumbnailId { get; }
@@ -17,7 +16,6 @@ namespace MvcDemo.Services {
     public class ContentInfo : IEquatable<ContentInfo>, IContentInfo {
         public string Id { get; set; }
         public string OriginalFilename { get; set; }
-        public string UserDescription { get; set; }
         public string ContentType { get; set; }
         public string ImageId { get; set; }
         public string ThumbnailId { get; set; }
