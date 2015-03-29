@@ -24,7 +24,9 @@ namespace MvcDemo.Services {
                             OriginalFilename = c.OriginalFilename,
                             ThumbnailId = c.ThumbnailId,
                             FullImageId = c.ImageId,
-                        })
+                            CreationDate = c.CreationDate,
+                            OriginalSize = c.ImageSize,
+                        }).OrderByDescending(i=>i.CreationDate)
             };
         }
 

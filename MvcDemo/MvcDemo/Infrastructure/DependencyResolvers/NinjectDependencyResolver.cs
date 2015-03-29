@@ -25,7 +25,6 @@ namespace MvcDemo.Infrastructure.DependencyResolvers {
 
         void AddBindings() {
             _kernel.Bind<IContentManager>().To<ContentManager>();
-            _kernel.Bind<IImageMaker>().To<ImageMaker>();
             _kernel.Bind<IViewModelBuilder<ViewUploadViewModel>>().To<ViewUploadViewModelBuilder>();
         }
 

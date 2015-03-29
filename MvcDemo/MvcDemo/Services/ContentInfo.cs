@@ -1,4 +1,5 @@
 using System;
+using System.Drawing;
 
 namespace MvcDemo.Services {
    
@@ -7,8 +8,10 @@ namespace MvcDemo.Services {
         string OriginalFilename { get; }
         string UserDescription { get; }
         string ContentType { get; }
-        string ImageId { get; set; }
-        string ThumbnailId { get; set; }
+        string ImageId { get;  }
+        string ThumbnailId { get; }
+        DateTime CreationDate { get; }
+        Size ImageSize { get; set; }
     }
 
     public class ContentInfo : IEquatable<ContentInfo>, IContentInfo {
@@ -18,6 +21,8 @@ namespace MvcDemo.Services {
         public string ContentType { get; set; }
         public string ImageId { get; set; }
         public string ThumbnailId { get; set; }
+        public DateTime CreationDate { get; set; }
+        public Size ImageSize { get; set; }
 
         public bool Equals(ContentInfo other) {
             if (ReferenceEquals(null, other)) {
@@ -52,12 +57,14 @@ namespace MvcDemo.Services {
         string Id { get; set; }
         string ContentType { get; set; }
         byte[] Bytes { get; set; }
+        Size ImageSize { get; set; }
     }
 
     public class Content : IContent, IEquatable<Content> {
         public string Id { get; set; }
         public string ContentType { get; set; }
         public byte[] Bytes { get; set; }
+        public Size ImageSize { get; set; }
 
         public bool Equals(Content other) {
             if (ReferenceEquals(null, other)) {

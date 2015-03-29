@@ -1,14 +1,15 @@
 ﻿@model MvcDemo.ViewModels.UploadedImage
 
 <div class="row">
-    <div class="col-md-7">
-        <a href="javascript:void">
-            
-            <img src="@Url.Action("Image", "Home", new{id=Model.ThumbnailId})" class="img-responsive" />
-        </a>
+    <div class="thumb-info col-md-5 col-md-push-7">
+        <h3>@Model.OriginalFilename</h3>
+        <h4>Original size: @(Model.OriginalSize.Width)x@(Model.OriginalSize.Height)</h4>
     </div>
-    <div class="col-md-5">
-        <h3>Image name</h3>
-        <h4>Original size: 600x800</h4>
+    <div class="uploaded-thumb col-md-7 col-md-pull-5">
+        @* causes a Cross-origin resource sharing (CORS) problem in IIS express *@
+@*        <a target="_blank" href="@Url.Action("Image", "Home", new{id=Model.FullImageId})">*@
+
+            <img alt="@Model.OriginalFilename" src="@Url.Action("Image", "Home", new{id=Model.ThumbnailId})" class="img-thumbnail" />
+@*        </a>*@
     </div>
 </div>

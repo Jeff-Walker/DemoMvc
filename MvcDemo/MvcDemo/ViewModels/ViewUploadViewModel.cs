@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
 
 namespace MvcDemo.ViewModels {
     public class ViewUploadViewModel {
@@ -10,5 +12,7 @@ namespace MvcDemo.ViewModels {
         public string OriginalFilename { get; set; }
         public string ThumbnailId { get; set; }
         public string FullImageId { get; set; }
+        public DateTime CreationDate { get; set; }
+        public Size OriginalSize { get; set; }
     }
 }

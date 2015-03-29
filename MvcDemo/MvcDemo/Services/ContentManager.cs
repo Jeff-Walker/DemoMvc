@@ -14,13 +14,9 @@ namespace MvcDemo.Services {
 
 
     public class ContentManager : IContentManager {
-        readonly IImageMaker _imageMaker;
         static readonly IDictionary<string, IContentInfo> ContentDatabase = new ConcurrentDictionary<string, IContentInfo>();
         static readonly IDictionary<string, IContent> ContentObjects = new ConcurrentDictionary<string, IContent>();
 
-        public ContentManager(IImageMaker imageMaker) {
-            _imageMaker = imageMaker;
-        }
 
         public IEnumerable<IContentInfo> ListImages() {
             return ContentDatabase.Values;
@@ -29,15 +25,21 @@ namespace MvcDemo.Services {
         public string SaveImage(string originalFilename, string contentType, Stream inputStream) {
             var id = NewId();
 
+            var originalImageBytes = ReadStream(inputStream);
+            var imageMaker = new ImageMaker(originalImageBytes);
+            var thumbnailBytes = imageMaker.MakeThumbnail();
+
             var content = new Content() {
                 Id = NewId(),
-                Bytes = ReadStream(inputStream),
+                Bytes = originalImageBytes,
                 ContentType = contentType,
+                ImageSize = imageMaker.OriginalSize,
             };
             var thumbnailContent = new Content() {
                 Id = NewId(),
-                Bytes = _imageMaker.MakeThumbnail(content.Bytes),
+                Bytes = thumbnailBytes,
                 ContentType = "image/png",
+                ImageSize = imageMaker.ThumbnailSize,
             };
             
             var contentInfo = new ContentInfo() {
@@ -46,6 +48,8 @@ namespace MvcDemo.Services {
                 ContentType = contentType,
                 ImageId = content.Id,
                 ThumbnailId = thumbnailContent.Id,
+                CreationDate = DateTime.Now,
+                ImageSize = imageMaker.OriginalSize,
             };
 
             ContentDatabase.Add(id, contentInfo);

@@ -3,17 +3,21 @@ using System.Drawing.Imaging;
 using System.IO;
 
 namespace MvcDemo.Services {
-    public interface IImageMaker {
-        byte[] MakeThumbnail(byte[] bytes);
-    }
-    public class ImageMaker : IImageMaker {
+    
+    public class ImageMaker {
+        readonly byte[] _bytes;
         static readonly Size ThumbnailMaximumSize = new Size(500, 700);
 
-        public byte[] MakeThumbnail(byte[] bytes) {
-            using (var ms = new MemoryStream(bytes)) {
+        public ImageMaker(byte[] bytes) {
+            _bytes = bytes;
+        }
+
+        public byte[] MakeThumbnail() {
+            using (var ms = new MemoryStream(_bytes)) {
                 using (var originalImage = Image.FromStream(ms)) {
-                    var newSize = CalculateNewSize(originalImage);
-                    var thumbnail = new Bitmap(originalImage, newSize);
+                    OriginalSize = originalImage.Size;
+                    ThumbnailSize = CalculateNewSize(originalImage);
+                    var thumbnail = new Bitmap(originalImage, ThumbnailSize);
                     var outStream = new MemoryStream();
                     thumbnail.Save(outStream, ImageFormat.Png);
 
@@ -21,6 +25,8 @@ namespace MvcDemo.Services {
                 }
             }
         }
+        public Size ThumbnailSize { get; set; }
+        public Size OriginalSize { get; set; }
 
         static Size CalculateNewSize(Image originalImage) {
 //            var originalWidth = originalImage.Width;
@@ -32,9 +38,9 @@ namespace MvcDemo.Services {
                 return original;
             }
 
-            var newSize = new Size();
+             var newSize = new Size();
             var aspect = ((double) original.Width) / original.Height;
-            if (aspect > 0) {
+            if (aspect > 1.0) {
                 // lanscape
                 newSize.Width = ThumbnailMaximumSize.Width;
                 newSize.Height = (int) (newSize.Width / aspect);
