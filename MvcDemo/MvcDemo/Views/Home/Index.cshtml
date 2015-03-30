@@ -6,9 +6,7 @@
 }
 
 <div class="container">
-@*    <div class="page-header">*@
-        <h1 class="page-header">Upload and view images</h1>
-@*    </div>*@
+    <h1 class="page-header">Upload and view images</h1>
    
     @using (Html.BeginForm("Upload", "Home", FormMethod.Post, new { enctype = "multipart/form-data" })) {
         
