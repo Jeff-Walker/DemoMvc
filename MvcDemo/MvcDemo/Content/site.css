@@ -1,6 +1,11 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    background: url(/Content/light_grey.png) repeat 0 0
+}
+
+h1 { 
+    text-shadow: 1px 1px 1px #ccc;
 }
 
 /* Set padding to keep content from hitting the edges */

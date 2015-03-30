@@ -6,9 +6,9 @@
 }
 
 <div class="container">
-    <div class="page-header">
-        <h1 class="page-header">Upload and view some pictures</h1>
-    </div>
+@*    <div class="page-header">*@
+        <h1 class="page-header">Upload and view images</h1>
+@*    </div>*@
    
     @using (Html.BeginForm("Upload", "Home", FormMethod.Post, new { enctype = "multipart/form-data" })) {
         
@@ -22,7 +22,7 @@
             </span>
             <input type="text" class="form-control" readonly>
             <span class="input-group-btn">
-                <button type="submit" class="btn btn-primary">Upload</button>
+                <button type="submit" class="btn btn-primary">Upload&nbsp;<i class="glyphicon glyphicon-upload"></i></button>
             </span>
         </div>
     </div>
